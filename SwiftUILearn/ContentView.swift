@@ -13,28 +13,15 @@ struct ContentView: View {
     @State private var password = ""
     
     var body: some View {
-        NavigationStack{
-            Form {
-                Section(header: Text("Personal Information")) {
-                    TextField("Username", text: $username)
-                    TextField("Email", text: $email)
-                }
-                Section(header: Text("Login Credetials")) {
-                    SecureField("Password", text: $password)
-                }
-                
-                Section {
-                    Button(action: register, label: {
-                        Text("Register")
-                    })
-                }
-            }
-            .navigationTitle("Registration Form")
-        }
-    }
-    
-    func register() {
-        print("Register")
+        Text("Hello, world!")
+            .frame(width: 200, height: 50)
+            .background(
+                Image("background01")
+                    .resizable(resizingMode: .tile)
+                    .opacity(0.25)
+            )
+            .fontWeight(.heavy)
+            .border(.black, width: 2)
     }
 }
 
