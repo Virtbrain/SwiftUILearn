@@ -13,12 +13,11 @@ struct ContentView: View {
     @State private var password = ""
     
     var body: some View {
-        Text("Hello, ClipShape!")
-            .font(.largeTitle)
-            .padding()
-            .background(Color.blue)
-            .foregroundStyle(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+        VStack {
+            Text("This text has full opacity")
+            Text("This text is patially transparent.")
+                .opacity(0.5)
+        }
     }
 }
 
