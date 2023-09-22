@@ -8,12 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
-    let tasks = ["Task1", "Task2", "Task3", "Task4", "Task5"]
+    @State private var username = ""
+    @State private var email = ""
+    @State private var password = ""
     
     var body: some View {
-        List(tasks, id: \.self) { task in
-            Text(task)
+        NavigationStack{
+            Form {
+                Section(header: Text("Personal Information")) {
+                    TextField("Username", text: $username)
+                    TextField("Email", text: $email)
+                }
+                Section(header: Text("Login Credetials")) {
+                    SecureField("Password", text: $password)
+                }
+                
+                Section {
+                    Button(action: register, label: {
+                        Text("Register")
+                    })
+                }
+            }
+            .navigationTitle("Registration Form")
         }
+    }
+    
+    func register() {
+        print("Register")
     }
 }
 
