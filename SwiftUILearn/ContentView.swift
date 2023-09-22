@@ -8,34 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    let tasks = ["Task1", "Task2", "Task3", "Task4", "Task5"]
+    
     var body: some View {
-        NavigationStack {
-            VStack{
-                Text("Welcome to my app!")
-                NavigationLink(destination: DetailView()) {
-                    Text("Go to Detail View")
-                }
-            }
+        List(tasks, id: \.self) { task in
+            Text(task)
         }
-        .navigationTitle("Home")
-        .navigationBarTitleDisplayMode(.large)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    print("Settings tapped")
-                }, label: {
-                    Text("Settings")
-                })
-            }
-        }
-    }
-}
-
-struct DetailView: View {
-    var body: some View {
-        Text("This is the detail view!")
-            .navigationTitle("Detail")
-            .navigationBarTitleDisplayMode(.large)
     }
 }
 
