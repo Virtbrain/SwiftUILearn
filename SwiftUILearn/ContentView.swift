@@ -9,13 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Image("Bear")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 200, height: 200)
-            .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-            .shadow(radius: 7)
+        Button(action: {
+            print("Button pressed")
+        }, label: {
+            Text("Press me!")
+                .font(.largeTitle)
+                .foregroundColor(.white)
+        })
+        .padding()
+        .background(
+            LinearGradient(gradient: Gradient(colors: [.purple, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing)
+        )
+        .cornerRadius(10)
     }
 }
 
