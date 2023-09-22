@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var username = ""
-    @State private var email = ""
-    @State private var password = ""
     
     var body: some View {
-        VStack {
-            Text("This text has full opacity")
-            Text("This text is patially transparent.")
-                .opacity(0.5)
-        }
+        Text("Hello, \nCircular View!")
+            .multilineTextAlignment(.center)
+            .padding(50)
+            .foregroundStyle(.white)
+            .background(
+                Circle()
+                    .fill(.blue)
+                    .frame(width: 200, height: 200)
+            )
     }
 }
 
