@@ -13,15 +13,17 @@ struct ContentView: View {
     @State private var password = ""
     
     var body: some View {
-        Text("Hello, world!")
-            .frame(width: 200, height: 50)
-            .background(
-                Image("background01")
-                    .resizable(resizingMode: .tile)
-                    .opacity(0.25)
-            )
-            .fontWeight(.heavy)
-            .border(.black, width: 2)
+        VStack{
+            Text("Hello, shadows!")
+                .font(.largeTitle)
+                .padding()
+                .background(.white)
+                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            Circle()
+                .fill(.blue)
+                .shadow(color: .purple, radius: 10, x: 0, y: 0)
+                .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+        }
     }
 }
 
