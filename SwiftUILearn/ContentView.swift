@@ -7,22 +7,17 @@
 
 import SwiftUI
 
+class UserSettings: ObservableObject {
+    @Published var username = "Anonymus"
+}
+
 struct ContentView: View {
-    @State private var isSwitchedOn = false
-    
+    @ObservedObject var settings = UserSettings()
     var body: some View {
         VStack{
-            Toggle(isOn: $isSwitchedOn, label: {
-                Text("Turn me on or off")
-            })
-                .padding(40)
-
-            if isSwitchedOn {
-                Text("The switch is on!")
-                    .foregroundStyle(.blue)
-            } else {
-                Text("The switch is off!")
-                    .foregroundStyle(.red)
+            Text("Hello, \(settings.username)!")
+            Button("Change Username") {
+                settings.username = "John Doe"
             }
         }
     }
