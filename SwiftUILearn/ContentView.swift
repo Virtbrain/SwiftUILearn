@@ -7,13 +7,51 @@
 
 import SwiftUI
 
-class GameSettings: ObservableObject {
-    @Published var score = 0
+class TimerManager: ObservableObject {
+    @Published var timerCount = 0
+    private var timer = Timer()
+    
+    func start() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            self?.timerCount += 1
+        }
+    }
+    
+    func stop() {
+        timerCount = 0
+        timer.invalidate()
+    }
 }
+
 struct ContentView: View {
+    @StateObject private var timerManager = TimerManager()
+    
     var body: some View {
-        GameView()
-            .environmentObject(GameSettings())
+        VStack {
+            Text("Timer count: \(timerManager.timerCount)")
+            Button(action: {
+                timerManager.start()
+            }, label: {
+                Text("Start timer")
+                    .padding()
+            })
+                .background(.blue)
+                .foregroundStyle(.white)
+                .font(.title)
+                .clipShape(.buttonBorder)
+                .padding()
+            Button(action: {
+                timerManager.stop()
+            }, label: {
+                Text("Stop Timer")
+                    .padding()
+            })
+                .background(.blue)
+                .foregroundStyle(.white)
+                .font(.title)
+                .clipShape(.buttonBorder)
+                .padding()
+        }
     }
 }
 

@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct GameView: View {
-    @EnvironmentObject var settings: GameSettings
+    
     var body: some View {
         VStack {
-            Text("Score: \(settings.score)")
-            Button("Increment Score") {
-                settings.score += 1
-            }
+            
         }
     }
 }
