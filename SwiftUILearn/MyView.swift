@@ -8,49 +8,36 @@
 import SwiftUI
 
 struct MyView: View {
+    @State private var selectedColor = Color.red
+    
     var body: some View {
         VStack {
-            Text("Circle")
-                .frame(width: 200, height: 200)
-                .font(.title)
-                .padding()
-                .background(.orange)
-                .foregroundStyle(.white)
-                .clipShape(Circle())
-            Text("Ellipse")
-                .frame(width: 200, height: 100)
-                .font(.title)
-                .padding()
-                .background(.orange)
-                .foregroundStyle(.white)
-                .clipShape(Ellipse())
-            Text("Capsule")
-                .frame(width: 200, height: 100)
-                .font(.title)
-                .padding()
-                .background(.orange)
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
-            Text("Custom")
-                .frame(width: 200, height: 100)
-                .font(.title)
-                .padding()
-                .background(.orange)
-                .foregroundStyle(.black)
-                .clipShape(CustomShape())
+            Rectangle()
+                .fill(selectedColor)
+                .frame(width: 100, height: 100, alignment: .center)
+            
+            ColorPickerView(selectedColor: $selectedColor)
         }
+        .padding()
     }
 }
 
-struct CustomShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-        path.closeSubpath()
-        
-        return path
+struct ColorPickerView: View {
+    @Binding var selectedColor: Color
+    
+    let colors: [Color] = [.red, .green, .blue, .yellow, .orange]
+    
+    var body: some View {
+        HStack {
+            ForEach(colors, id: \.self) { color in
+                Rectangle()
+                    .fill(color)
+                    .frame(width: 50, height: 50)
+                    .onTapGesture {
+                        selectedColor = color
+                    }
+            }
+        }
     }
 }
 
