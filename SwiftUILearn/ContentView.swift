@@ -7,19 +7,13 @@
 
 import SwiftUI
 
-class UserSettings: ObservableObject {
-    @Published var username = "Anonymus"
+class GameSettings: ObservableObject {
+    @Published var score = 0
 }
-
 struct ContentView: View {
-    @ObservedObject var settings = UserSettings()
     var body: some View {
-        VStack{
-            Text("Hello, \(settings.username)!")
-            Button("Change Username") {
-                settings.username = "John Doe"
-            }
-        }
+        GameView()
+            .environmentObject(GameSettings())
     }
 }
 

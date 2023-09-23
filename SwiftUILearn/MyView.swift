@@ -7,40 +7,15 @@
 
 import SwiftUI
 
-struct MyView: View {
-    @State private var selectedColor = Color.red
-    
+struct GameView: View {
+    @EnvironmentObject var settings: GameSettings
     var body: some View {
         VStack {
-            Rectangle()
-                .fill(selectedColor)
-                .frame(width: 100, height: 100, alignment: .center)
-            
-            ColorPickerView(selectedColor: $selectedColor)
-        }
-        .padding()
-    }
-}
-
-struct ColorPickerView: View {
-    @Binding var selectedColor: Color
-    
-    let colors: [Color] = [.red, .green, .blue, .yellow, .orange]
-    
-    var body: some View {
-        HStack {
-            ForEach(colors, id: \.self) { color in
-                Rectangle()
-                    .fill(color)
-                    .frame(width: 50, height: 50)
-                    .onTapGesture {
-                        selectedColor = color
-                    }
+            Text("Score: \(settings.score)")
+            Button("Increment Score") {
+                settings.score += 1
             }
         }
     }
 }
 
-#Preview {
-    MyView()
-}
