@@ -7,68 +7,46 @@
 
 import SwiftUI
 
-enum Theme {
-    case light, dark
-}
-
-struct ThemeKey: EnvironmentKey {
-    static let defaultValue: Theme = .light
-}
-
-extension EnvironmentValues {
-    var theme: Theme {
-        get { self[ThemeKey.self] }
-        set { self[ThemeKey.self] = newValue }
+class TaskManager: ObservableObject {
+    @Published var tasks = [String]()
+    
+    func addTask(_ task: String) {
+        tasks.append(task)
     }
 }
 
-struct ThemedView: View {
-    @Environment(\.theme) var theme: Theme
+struct TaskListView: View {
+    @EnvironmentObject var taskManager: TaskManager
+    @State private var newTask = ""
     
     var body: some View {
-        VStack {
-            if theme == .light {
-                Text("Light Theme")
-                    .foregroundStyle(.black)
-                    .background(.white)
-            } else {
-                Text("Dark Theme")
-                    .foregroundStyle(.white)
-                    .background(.black)
+        NavigationStack {
+            VStack {
+                TextField("New task", text: $newTask)
+                    .onSubmit {
+                        if !newTask.isEmpty {
+                            taskManager.addTask(newTask)
+                            newTask = ""
+                        }
+                    }
+                    .padding()
+                List(taskManager.tasks, id:\.self) { task in
+                    Text(task)
+                }
             }
+            .navigationTitle("Task List")
         }
-        .padding()
     }
 }
+
 
 
 struct ContentView: View {
-    @State var theme: Theme = .light
+    @StateObject var taskManager = TaskManager()
     
     var body: some View {
-        VStack {
-            Button("Switch Theme") {
-                switch theme {
-                case .light:
-                    theme = .dark
-                case .dark:
-                    theme = .light
-                }
-            }
-            .background(.blue)
-            .padding()
-            .foregroundStyle(.white)
-            .font(.title)
-            
-            ThemedView()
-        }
-        .theme(theme)
-    }
-}
-
-extension View {
-    func theme(_ theme: Theme) -> some View {
-        environment(\.theme, theme)
+        TaskListView()
+            .environmentObject(taskManager)
     }
 }
 
