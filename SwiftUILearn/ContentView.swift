@@ -10,10 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        Text("Hello, world!")
+        let name = "Sarah"
+        Text("Hello, \(name)! \nThanks for using our app. \n\nWe hope you have a great experience.")
             .font(.custom("Papyrus", size: 24))
+            .lineLimit(5)
+            .multilineTextAlignment(.center)
             .foregroundStyle(.purple)
-            .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
     }
 }
