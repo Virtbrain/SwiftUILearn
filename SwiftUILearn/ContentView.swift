@@ -7,44 +7,30 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    
-    var body: some View {
-        VStack {
-            Text("Welcome to my app!")
-                .font(.largeTitle)
-                .foregroundStyle(.blue)
-                .padding()
-            
-            Text("Explore the world")
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundStyle(.green)
-                .padding()
-            
-            Text("Discover new places and experiences")
-                .font(.headline)
-                .padding()
-            
-            Text("Get inspired")
-                .font(.subheadline)
-                .foregroundStyle(.purple)
-                .padding()
-            
-            Text("Join our community")
-                .font(.callout)
-                .foregroundStyle(.orange)
-                .padding()
-            
-            Text("Shara your adventures with us")
-                .font(.footnote)
-                .foregroundStyle(.gray)
-                .padding()
+let quote = """
+**"Be yourself;** everyone else is _already taken._"
+- **Oscar Wilde**
+"""
 
-            Text("Follow us on social media")
-                .font(.caption)
-                .foregroundStyle(.black)
+let attributedQuote = try! AttributedString(markdown: quote)
+
+struct ContentView: View {
+    var body: some View {
+        VStack{
+            Text("Hello, world!")
+                .fontWeight(.semibold)
+                .italic()
+                .underline()
+                .strikethrough(true, color: .red)
+                .foregroundStyle(Color(red: 69/255, green: 217/255, blue: 79/255))
                 .padding()
+            
+            Text("Markdown in the text like **Bold** and _italic_")
+                .foregroundStyle(.blue)
+            
+            Text(attributedQuote)
+                .font(.system(size: 16, weight: .medium, design: .serif))
+                .foregroundStyle(.red)
         }
     }
 }
