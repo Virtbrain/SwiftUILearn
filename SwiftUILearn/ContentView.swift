@@ -10,13 +10,42 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        let name = "Sarah"
-        Text("Hello, \(name)! \nThanks for using our app. \n\nWe hope you have a great experience.")
-            .font(.custom("Papyrus", size: 24))
-            .lineLimit(5)
-            .multilineTextAlignment(.center)
-            .foregroundStyle(.purple)
-            .padding()
+        VStack {
+            Text("Welcome to my app!")
+                .font(.largeTitle)
+                .foregroundStyle(.blue)
+                .padding()
+            
+            Text("Explore the world")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundStyle(.green)
+                .padding()
+            
+            Text("Discover new places and experiences")
+                .font(.headline)
+                .padding()
+            
+            Text("Get inspired")
+                .font(.subheadline)
+                .foregroundStyle(.purple)
+                .padding()
+            
+            Text("Join our community")
+                .font(.callout)
+                .foregroundStyle(.orange)
+                .padding()
+            
+            Text("Shara your adventures with us")
+                .font(.footnote)
+                .foregroundStyle(.gray)
+                .padding()
+
+            Text("Follow us on social media")
+                .font(.caption)
+                .foregroundStyle(.black)
+                .padding()
+        }
     }
 }
 
