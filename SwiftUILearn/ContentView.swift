@@ -8,15 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var password = ""
+    @State private var cell = ""
+    @State private var name = ""
+    
     var body: some View {
-        SecureField("Enter your password", text: $password)
-            .textContentType(.password)
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 5).stroke())
-            .multilineTextAlignment(.center)
-            .padding()
-
+        VStack{
+            TextField("Enter your cell number", text: $cell)
+                .multilineTextAlignment(.center)
+                .keyboardType(.phonePad)
+                .padding()
+            
+            TextField("Enter ypur name", text: $name)
+                .keyboardType(.default)
+                .multilineTextAlignment(.center)
+                .submitLabel(.done)
+                .onSubmit {
+                    print("Name entered: \(name)")
+                }
+                .padding()
+        }
+        
     }
 }
 
