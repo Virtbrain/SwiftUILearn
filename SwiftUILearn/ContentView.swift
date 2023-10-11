@@ -12,11 +12,16 @@ struct ContentView: View {
     @State private var name = ""
     
     var body: some View {
-        Image("Clower")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-            .padding()
+        VStack {
+            Text("Cropping With Clipped")
+                .font(.title)
+            Image("CaneCorso")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 200, height: 200)
+                .clipped()
+                .border(.black, width: 2)
+        }
     }
 }
 
