@@ -6,19 +6,30 @@
 //
 
 import SwiftUI
-import CoreImage
-import CoreImage.CIFilterBuiltins
 
 struct ContentView: View {
     var body: some View {
-        Button("Click me!") {
-            //Action
+        VStack {
+            HStack {
+                Button("Red", action: {})
+                    .foregroundStyle(.red)
+                Button("Green", action: {})
+                    .foregroundStyle(.green)
+                Button("Blue", action: {})
+                    .foregroundStyle(.blue)
+            }
         }
-        .font(.headline)
-        .padding()
-        .foregroundStyle(.white)
-        .background(.blue)
-        .cornerRadius(5.0)
+        
+        Divider()
+        
+        VStack {
+            Button("Red", action: {})
+                .foregroundStyle(.red)
+            Button("Green", action: {})
+                .foregroundStyle(.green)
+            Button("Blue", action: {})
+                .foregroundStyle(.blue)
+        }
     }
 }
     
