@@ -8,28 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isButtonDisabled = true
+    
     var body: some View {
-        VStack {
-            HStack {
-                Button("Red", action: {})
-                    .foregroundStyle(.red)
-                Button("Green", action: {})
-                    .foregroundStyle(.green)
-                Button("Blue", action: {})
-                    .foregroundStyle(.blue)
+        VStack(spacing: 25) {
+            Button("Tap me") {
+                print("Button tapped")
             }
+            .padding()
+            .background(isButtonDisabled ? .gray : .yellow)
+            .foregroundStyle(isButtonDisabled ? Color.white : Color.black)
+            .font(.title)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .disabled(isButtonDisabled)
+            .shadow(color: .gray, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: 10, y: 10)
+            
+            Button("\(isButtonDisabled ? "Enable" : "Disable") button") {
+                isButtonDisabled.toggle()
+            }
+            .padding()
+            .background(.blue)
+            .foregroundStyle(.white)
+            .font(.title)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .shadow(color: .gray, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: 10, y: 10)
         }
-        
-        Divider()
-        
-        VStack {
-            Button("Red", action: {})
-                .foregroundStyle(.red)
-            Button("Green", action: {})
-                .foregroundStyle(.green)
-            Button("Blue", action: {})
-                .foregroundStyle(.blue)
-        }
+       
     }
 }
     
