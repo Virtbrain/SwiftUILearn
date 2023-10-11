@@ -12,22 +12,11 @@ struct ContentView: View {
     @State private var name = ""
     
     var body: some View {
-        VStack{
-            TextField("Enter your cell number", text: $cell)
-                .multilineTextAlignment(.center)
-                .keyboardType(.phonePad)
-                .padding()
-            
-            TextField("Enter ypur name", text: $name)
-                .keyboardType(.default)
-                .multilineTextAlignment(.center)
-                .submitLabel(.done)
-                .onSubmit {
-                    print("Name entered: \(name)")
-                }
-                .padding()
-        }
-        
+        Image("Clower")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+            .padding()
     }
 }
 
