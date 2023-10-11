@@ -7,14 +7,19 @@
 
 import SwiftUI
 
+private var tapCount = 0
+
 struct ContentView: View {
     @State private var isButtonDisabled = true
     
     var body: some View {
         VStack(spacing: 25) {
-            Button("Tap me") {
-                print("Button tapped")
-            }
+            Button(action: {
+                increment()
+                print("Button was tapped \(tapCount)")
+            }, label: {
+                Label("Show Some Love!", systemImage: "heart.fill")
+            })
             .padding()
             .background(isButtonDisabled ? .gray : .yellow)
             .foregroundStyle(isButtonDisabled ? Color.white : Color.black)
@@ -34,6 +39,10 @@ struct ContentView: View {
             .shadow(color: .gray, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: 10, y: 10)
         }
        
+    }
+    
+    private func increment() {
+        tapCount += 1
     }
 }
     
