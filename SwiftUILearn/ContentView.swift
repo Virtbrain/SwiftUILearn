@@ -7,34 +7,17 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
-    @State private var cell = ""
-    @State private var name = ""
     
     var body: some View {
-        VStack {
-            Image(systemName: "pawprint.circle.fill")
-                .font(.largeTitle)
-                .foregroundStyle(.blue)
-                .padding()
-            
-            HStack {
-                Image(systemName: "bell")
-                    .font(.largeTitle)
-                    .foregroundStyle(.red)
-                    .symbolVariant(.slash)
-                
-                Image(systemName: "bell")
-                    .font(.largeTitle)
-                    .foregroundStyle(.red)
-                    .symbolVariant(.square)
-                
-                Image(systemName: "bell")
-                    .font(.largeTitle)
-                    .foregroundStyle(.red)
-                    .symbolVariant(.fill.slash)
-            }
-        }
+        Image("CaneCorso")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: .infinity)
+            .shadow(color: /*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/, radius: 20, x: 15, y: 15)
+            .border(Color.gray, width: 1)
         
     }
 }
