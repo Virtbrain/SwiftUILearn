@@ -7,42 +7,34 @@
 
 import SwiftUI
 
-private var tapCount = 0
-
-struct ContentView: View {
-    @State private var isButtonDisabled = true
+struct ScientistDetailView: View {
+    let name: String
     
     var body: some View {
-        VStack(spacing: 25) {
-            Button(action: {
-                increment()
-                print("Button was tapped \(tapCount)")
-            }, label: {
-                Label("Show Some Love!", systemImage: "heart.fill")
-            })
-            .padding()
-            .background(isButtonDisabled ? .gray : .yellow)
-            .foregroundStyle(isButtonDisabled ? Color.white : Color.black)
-            .font(.title)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .disabled(isButtonDisabled)
-            .shadow(color: .gray, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: 10, y: 10)
-            
-            Button("\(isButtonDisabled ? "Enable" : "Disable") button") {
-                isButtonDisabled.toggle()
-            }
-            .padding()
-            .background(.blue)
-            .foregroundStyle(.white)
-            .font(.title)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .shadow(color: .gray, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: 10, y: 10)
+        VStack {
+            Text(name)
+                .font(.title)
+                .padding()
+            Text("More details about \(name) would be presented here.")
+                .font(.body)
+                .foregroundStyle(.gray)
         }
-       
+        .navigationTitle(name)
     }
+}
+
+struct ContentView: View {
+    let scientists = ["Albert Einstein", "Iisac Newton", "Marie Curie", "Charles Darwin", "Nikola Tesla"]
     
-    private func increment() {
-        tapCount += 1
+    var body: some View {
+        NavigationStack{
+            List(scientists, id: \.self) { scientist in
+                NavigationLink(scientist, value: scientist)
+            }
+            .navigationDestination(for: String.self) { scientistName in
+                ScientistDetailView(name: scientistName)
+            }
+        }
     }
 }
     
