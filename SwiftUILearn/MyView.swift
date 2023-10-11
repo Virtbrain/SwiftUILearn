@@ -12,15 +12,17 @@ struct SwiftUIView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            Text("Tab 1")
+            Text("Your View Here")
                 .tabItem {
-                    Label("Tab 1", systemImage: "1.circle")
+                    Label("Home", systemImage: "person")
+                        .symbolVariant(.none)
                 }
                 .tag("Tab1")
             
-            Text("Tab 2")
+            Text("Your Activity View Here")
                 .tabItem {
-                    Label("Tab 2", systemImage: "2.circle")
+                    Label("Activity", systemImage: "bell")
+                        .symbolVariant(.none)
                 }
                 .tag("Tab2")
         }

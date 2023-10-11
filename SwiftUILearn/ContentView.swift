@@ -13,15 +13,29 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Cropping With Clipped")
-                .font(.title)
-            Image("CaneCorso")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 200, height: 200)
-                .clipped()
-                .border(.black, width: 2)
+            Image(systemName: "pawprint.circle.fill")
+                .font(.largeTitle)
+                .foregroundStyle(.blue)
+                .padding()
+            
+            HStack {
+                Image(systemName: "bell")
+                    .font(.largeTitle)
+                    .foregroundStyle(.red)
+                    .symbolVariant(.slash)
+                
+                Image(systemName: "bell")
+                    .font(.largeTitle)
+                    .foregroundStyle(.red)
+                    .symbolVariant(.square)
+                
+                Image(systemName: "bell")
+                    .font(.largeTitle)
+                    .foregroundStyle(.red)
+                    .symbolVariant(.fill.slash)
+            }
         }
+        
     }
 }
 
