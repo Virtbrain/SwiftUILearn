@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct SwiftUIView: View {
-    @SceneStorage("selectedTab") var selectedTab: String?
+    @State private var selectedItem = "Item 1"
+    
+    @State private var details = [
+        "Item 1",
+        "Item 2",
+        "Item 3"
+    ]
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            Text("Your View Here")
-                .tabItem {
-                    Label("Home", systemImage: "person")
-                        .symbolVariant(.none)
+        NavigationStack {
+            List {
+                ForEach(details, id: \.self) { detail in
+                    Button(detail) {
+                        selectedItem = detail
+                    }
+                    .foregroundStyle(.black)
                 }
-                .tag("Tab1")
-            
-            Text("Your Activity View Here")
-                .tabItem {
-                    Label("Activity", systemImage: "bell")
-                        .symbolVariant(.none)
-                }
-                .tag("Tab2")
+            }
+            .navigationTitle(selectedItem)
         }
     }
 }

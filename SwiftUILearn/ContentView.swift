@@ -7,55 +7,26 @@
 
 import SwiftUI
 
-struct Park: Hashable {
-    let name: String
-    let imageName: String
-    let description: String
-}
-
-extension Park: Identifiable {
-    var id: String { name }
-}
-
-struct ParkDetailsView: View {
-    let park: Park
-    
-    var body: some View {
-        VStack {
-            Image(park.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 200)
-            Text(park.name)
-                .font(.title)
-                .foregroundStyle(Color.primary)
-            Text(park.description)
-                .font(.body)
-                .foregroundStyle(Color.secondary)
-        }
-        .padding()
-    }
-}
-
 struct ContentView: View {
-    @State private var presentedParks: [Park] = []
-    
-    var parks: [Park] {
-        [
-            Park(name: "Yosemite", imageName: "yosemite", description: "Yosemite National Park"),
-            Park(name: "Sequoia", imageName: "sequoia", description: "Sequoia Natiaonal Park"),
-            Park(name: "Point Reyes", imageName: "point_reyes", description: "Point Reyes National Seashore")
-        ]
-    }
     var body: some View {
-        NavigationStack(path: $presentedParks) {
-            List(parks) { park in
-                NavigationLink(park.name, value: park)
+        NavigationStack {
+            List {
+                NavigationLink("Item 1", value: "Item 1 Detail View")
+                NavigationLink("Item 2", value: "Item 2 Detail View")
+                NavigationLink("Item 3", value: "Item 3 Detail View")
             }
-            .navigationDestination(for: Park.self) { park in
-                ParkDetailsView(park: park)
+            .navigationTitle("List with Navigation")
+            .navigationDestination(for: String.self) { detail in
+                DetailView(detail: detail)
             }
         }
+    }
+}
+
+struct DetailView: View {
+    let detail: String
+    var body: some View {
+        Text(detail)
     }
 }
     
