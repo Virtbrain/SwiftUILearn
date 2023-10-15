@@ -14,6 +14,8 @@ struct Park: Identifiable {
 
 struct ContentView: View {
     @State private var searchText = ""
+    
+    let myView = SwiftUIView()
 
     let parks: [Park] = [
         Park(name: "Yosemite National Park"),
@@ -35,6 +37,17 @@ struct ContentView: View {
                     Text(park.name)
                 }
             }
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        myView
+                    } label: {
+                        Image(systemName: "sun.max.fill")
+                    }
+
+
+                }
+            })
             .navigationTitle("California Parks")
             .searchable(text: $searchText)
         }

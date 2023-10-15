@@ -7,26 +7,38 @@
 
 import SwiftUI
 
+struct Message {
+    var content: String
+    var isRead: Bool
+}
+
 struct SwiftUIView: View {
-    @State private var selectedItem = "Item 1"
-    
-    @State private var details = [
-        "Item 1",
-        "Item 2",
-        "Item 3"
+    @State var messages: [Message] = [
+        Message(content: "Hello!", isRead: false),
+        Message(content: "How are you?!", isRead: true),
+        Message(content: "Happy coding!", isRead: false)
     ]
     
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(details, id: \.self) { detail in
-                    Button(detail) {
-                        selectedItem = detail
+        List {
+            ForEach(messages.indices, id: \.self) { index in
+                Text(messages[index].content)
+                    .foregroundStyle(messages[index].isRead ? Color.black : Color.red)
+                    .swipeActions {
+                        Button {
+                            messages[index].isRead.toggle()
+                        } label: {
+                            Label("Toggle Read", systemImage: "envelope.open.fill")
+                        }
+                        
+                        Button(role: .destructive) {
+                            messages.remove(at: index)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+
                     }
-                    .foregroundStyle(.black)
-                }
             }
-            .navigationTitle(selectedItem)
         }
     }
 }
