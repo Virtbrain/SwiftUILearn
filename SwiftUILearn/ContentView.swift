@@ -7,28 +7,31 @@
 
 import SwiftUI
 
+struct CheckboxToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label 
+            Spacer()
+            Image(systemName: configuration.isOn ? "checkmark.square" : "square")
+                .resizable()
+                .frame(width: 24, height: 24)
+                .onTapGesture {
+                    configuration.isOn.toggle()
+                }
+        }
+    }
+}
+
 struct ContentView: View {
-    @State private var name = ""
-    @State private var email = ""
-    @State private var age = ""
+    @State private var isChecked: Bool = false
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section {
-                    TextField("Name", text: $name)
-                    TextField("Email", text: $email)
-                } header: {
-                    Text("Personal Information")
-                }
-                
-                Section {
-                    TextField("Age", text: $age)
-                } header: {
-                    Text("Additional Information")
-                }
+        VStack {
+            Toggle(isOn: $isChecked) {
+                Text("I agree to terms and conditions")
             }
-            .navigationTitle("Registration Form")
+            .toggleStyle(CheckboxToggleStyle())
+            .padding()
         }
     }
 }
