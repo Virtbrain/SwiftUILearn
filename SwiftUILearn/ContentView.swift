@@ -10,14 +10,22 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            List {
-                NavigationLink("Item 1", value: "Item 1 Detail View")
-                NavigationLink("Item 2", value: "Item 2 Detail View")
-                NavigationLink("Item 3", value: "Item 3 Detail View")
-            }
-            .navigationTitle("List with Navigation")
-            .navigationDestination(for: String.self) { detail in
-                DetailView(detail: detail)
+            Text("Hello, World!")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        print("Button pressed")
+                    }, label: {
+                        Image(systemName: "gear")
+                    })
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        print("Button pressed")
+                    }, label: {
+                        Image(systemName: "globe.europe.africa")
+                    })
+                }
             }
         }
     }
