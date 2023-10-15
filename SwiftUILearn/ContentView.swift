@@ -7,48 +7,36 @@
 
 import SwiftUI
 
-struct Item: Identifiable {
+struct Park: Identifiable {
     let id = UUID()
     let name: String
 }
 
 struct ContentView: View {
-    
-    let sectionsAndItems: [String: [Item]] = [
-        "Section 1" : [
-            Item(name: "Item 1"),
-            Item(name: "Item 2")
-        ],
-        "Sections 2" : [
-            Item(name: "Item 3"),
-            Item(name: "Item 4")
-        ]
+    @State private var searchText = ""
+
+    let parks: [Park] = [
+        Park(name: "Yosemite National Park"),
+        Park(name: "Redwood National snd State Parks"),
+        Park(name: "Sequoia National Park"),
+        Park(name: "Pinnacles National Park"),
+        Park(name: "Joshua Tree National Park"),
+        Park(name: "Death Valley National Park"),
+        Park(name: "Channel Islands National Park"),
+        Park(name: "Kings Canyon National Park"),
+        Park(name: "Lassen Volcaninc National Park"),
+        Park(name: "Point Reyes National Seashore")
     ]
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(Array(sectionsAndItems.keys), id: \.self) { section in
-                    Section {
-                        ForEach(sectionsAndItems[section] ?? []) { item in
-                            Text(item.name)
-                        }
-                    } header: {
-                        Text(section)
-                    }
+                ForEach(parks.filter{ searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }) { park in
+                    Text(park.name)
                 }
             }
-            .navigationTitle("My List")
-            .toolbar(content: {
-                ToolbarItem {
-                    Button {
-                        print(sectionsAndItems.keys)
-                    } label: {
-                        Image(systemName: "globe.central.south.asia.fill")
-                    }
-
-                }
-            })
+            .navigationTitle("California Parks")
+            .searchable(text: $searchText)
         }
     }
 }
