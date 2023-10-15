@@ -7,32 +7,18 @@
 
 import SwiftUI
 
-struct CheckboxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            configuration.label 
-            Spacer()
-            Image(systemName: configuration.isOn ? "checkmark.square" : "square")
-                .resizable()
-                .frame(width: 24, height: 24)
-                .onTapGesture {
-                    configuration.isOn.toggle()
-                }
-        }
-    }
-}
-
 struct ContentView: View {
-    @State private var isChecked: Bool = false
+    @State private var quantity: Int = 1
     
     var body: some View {
-        VStack {
-            Toggle(isOn: $isChecked) {
-                Text("I agree to terms and conditions")
+        VStack(spacing: 10) {
+            Text("How many packets of magic beans?")
+            Stepper(value: $quantity, in: 1...10) {
+                Text("\(quantity)")
             }
-            .toggleStyle(CheckboxToggleStyle())
-            .padding()
+            .padding(.horizontal, 100)
         }
+        .padding(30)
     }
 }
 
