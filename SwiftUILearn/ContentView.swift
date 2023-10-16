@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var progressValue = 0.0
+    @State private var colorChoise = Color.white
     
     var body: some View {
         VStack {
-            ProgressView(value: progressValue)
+           ColorPicker("Choose your color", selection: $colorChoise)
                 .padding()
             
-            Button("Start Download") {
-                for i in 1...100 {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) / 10.0) {
-                        progressValue = Double(i) / 100.0
-                    }
-                }
-            }
+            Text("Your choise:")
+                .font(.title)
+            
+            Rectangle()
+                .fill(colorChoise)
+                .frame(width: 100, height: 100)
+                .padding()
         }
     }
 }
