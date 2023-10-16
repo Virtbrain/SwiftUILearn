@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var quantity: Int = 1
+    @State private var selectedDate = Date()
     
     var body: some View {
-        VStack(spacing: 10) {
-            Text("How many packets of magic beans?")
-            Stepper(value: $quantity, in: 1...10) {
-                Text("\(quantity)")
-            }
-            .padding(.horizontal, 100)
+        VStack {
+            Text("Selected date is: \(selectedDate)")
+            
+            DatePicker("select a date", selection: $selectedDate, displayedComponents: .date)
+                .datePickerStyle(.graphical)
+                .padding()
         }
-        .padding(30)
+        .padding()
     }
 }
 
