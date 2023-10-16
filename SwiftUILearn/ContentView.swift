@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var value: Double = 0.5
+    @State private var selection = 0
     
     var body: some View {
         VStack {
-            Slider(value: $value, in: 0...1)
-            Text("Value: \(value, specifier: "%.2f")")
+            Picker(selection: $selection) {
+                Text("Option 1").tag(0)
+                Text("Option 2").tag(1)
+                Text("Option 3").tag(2)
+            } label: {
+                Text("Picker")
+            }
+            .pickerStyle(.segmented)
+
         }
         .padding()
     }
