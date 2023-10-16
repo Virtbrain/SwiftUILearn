@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selectedDate = Date()
+    @State private var value: Double = 0.5
     
     var body: some View {
         VStack {
-            Text("Selected date is: \(selectedDate)")
-            
-            DatePicker("select a date", selection: $selectedDate, displayedComponents: .date)
-                .datePickerStyle(.graphical)
-                .padding()
+            Slider(value: $value, in: 0...1)
+            Text("Value: \(value, specifier: "%.2f")")
         }
         .padding()
     }
