@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection = 0
+    @State private var progressValue = 0.0
     
     var body: some View {
         VStack {
-            Picker(selection: $selection) {
-                Text("Option 1").tag(0)
-                Text("Option 2").tag(1)
-                Text("Option 3").tag(2)
-            } label: {
-                Text("Picker")
+            ProgressView(value: progressValue)
+                .padding()
+            
+            Button("Start Download") {
+                for i in 1...100 {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) / 10.0) {
+                        progressValue = Double(i) / 100.0
+                    }
+                }
             }
-            .pickerStyle(.segmented)
-
         }
-        .padding()
     }
 }
 
