@@ -11,17 +11,18 @@ struct ContentView: View {
     @State private var colorChoise = Color.white
     
     var body: some View {
-        VStack {
-           ColorPicker("Choose your color", selection: $colorChoise)
-                .padding()
+        TabView {
+            Text("Tab 1's a star!")
+                .tabItem {
+                    Image(systemName: "star")
+                    Text("Tab 1")
+                }.tag(1)
             
-            Text("Your choise:")
-                .font(.title)
-            
-            Rectangle()
-                .fill(colorChoise)
-                .frame(width: 100, height: 100)
-                .padding()
+            Text("Show the love for Tab 2!")
+                .tabItem {
+                    Image(systemName: "heart")
+                    Text("Tab 2")
+                }.tag(2)
         }
     }
 }
