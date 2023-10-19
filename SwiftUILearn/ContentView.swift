@@ -7,31 +7,40 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State private var colorChoise = Color.white
+struct ModalView: View {
+    @Binding var isPresented: Bool
     
     var body: some View {
-        TabView {
-            Text("Firts Tab")
+        Text("this is a modal view.")
+            .padding()
+        Button("Dissmiss") {
+            isPresented = false
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var isPresented = false
+    @State private var selectedTab:Int = 1
+    
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            Text("First Tab")
                 .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("First")
+                    Image(systemName: "1.circle")
+                    Text("Tab 1")
                 }.tag(1)
-                .toolbarBackground(.hidden, for: .tabBar)
-            
             Text("Second Tab")
                 .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Second")
+                    Image(systemName: "2.circle")
+                    Text("Tab 2")
                 }.tag(2)
-                .toolbarBackground(.visible, for: .tabBar)
-                .toolbarBackground(Color.orange.opacity(0.8), for: .tabBar)
-            
-            Text("Third Tab")
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("T hird")
-                }
+        }
+        .onChange(of: selectedTab) { _, _ in
+            isPresented = true
+        }
+        .sheet(isPresented: $isPresented) {
+            ModalView(isPresented: $isPresented)
         }
     }
 }
