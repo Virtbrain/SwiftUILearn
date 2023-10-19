@@ -12,17 +12,26 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            Text("Tab 1's a star!")
+            Text("Firts Tab")
                 .tabItem {
-                    Image(systemName: "star")
-                    Text("Tab 1")
+                    Image(systemName: "1.square.fill")
+                    Text("First")
                 }.tag(1)
+                .toolbarBackground(.hidden, for: .tabBar)
             
-            Text("Show the love for Tab 2!")
+            Text("Second Tab")
                 .tabItem {
-                    Image(systemName: "heart")
-                    Text("Tab 2")
+                    Image(systemName: "2.square.fill")
+                    Text("Second")
                 }.tag(2)
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(Color.orange.opacity(0.8), for: .tabBar)
+            
+            Text("Third Tab")
+                .tabItem {
+                    Image(systemName: "3.square.fill")
+                    Text("T hird")
+                }
         }
     }
 }
