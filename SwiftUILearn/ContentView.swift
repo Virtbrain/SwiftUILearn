@@ -6,38 +6,30 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
-    @State private var selectedTab:Int = 1
-    @State private var isTabViewHidden = false
+    @State private var progress: CGFloat = 0.0
+    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
-            Button("Switch to second tab") {
-                selectedTab = 1
-            }
-            .padding()
+        ZStack(alignment: .leading, content: {
+            Rectangle()
+                .frame(width: 300, height: 20)
+                .opacity(0.3)
+                .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
+                .foregroundStyle(Color.gray)
             
-            Button(action: {
-                isTabViewHidden.toggle()
-            }, label: {
-                Text(isTabViewHidden ? "Show Tab View" : "Hide Tab View")
-            })
-            
-            if !isTabViewHidden {
-                TabView(selection: $selectedTab) {
-                    Text("First Tab")
-                        .tabItem {
-                            Image(systemName: "1.circle")
-                            Text("Tab 1")
-                        }.tag(1)
-                    Text("Second Tab")
-                        .tabItem {
-                            Image(systemName: "2.circle")
-                            Text("Tab 2")
-                        }.tag(2)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Rectangle()
+                .frame(width: progress * 300, height: 20)
+                .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
+                .foregroundStyle(Color.green)
+                .animation(.easeInOut, value: progress)
+        })
+        .onReceive(timer) {_ in
+            if progress < 1.0 {
+                progress += 0.01
             }
         }
     }
