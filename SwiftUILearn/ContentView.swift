@@ -7,69 +7,35 @@
 
 import SwiftUI
 
-enum Operations: String {
-    case plus = "+"
-    case minus = "-"
-}
-
-struct MathButton: View {
-    let operation: Operations
-    let valueOperation: Double
-    let competion: (Operations, Double) -> Void
-
+struct CircularProgress: View {
+    let progress: CGFloat
+    
     var body: some View {
-        Button(action: {
-            competion(operation, valueOperation)
-        }, label: {
-            Text("\(operation.rawValue) 0.1")
-                .bold()
-                .padding()
-                .font(.title)
-        })
-        .background(Color.orange)
-        .foregroundStyle(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 12.0))
-        .shadow(color: .black.opacity(0.3), radius: 5, x: 3, y: 5)
-        .padding()
+        ZStack {
+            Circle()
+                .stroke(lineWidth: 20)
+                .opacity(0.1)
+                .foregroundStyle(Color.blue)
+            Circle()
+                .trim(from: 0.0, to: min(progress, 1.0))
+                .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
+                .foregroundStyle(Color.blue)
+                .rotationEffect(Angle(degrees: 270.0))
+                .animation(.linear, value: progress)
+        }
     }
 }
 
 struct ContentView: View {
-    @State private var progress = 0.5
-    
-    func mathOperation(operation: Operations, value: Double) {
-        switch operation {
-        case .plus:
-            if progress < 0.9 {
-                progress += value
-            } else {
-                progress = 1.0
-            }
-        case .minus:
-            if progress > 0.1 {
-                progress -= value
-            } else {
-                progress = 0.0
-            }
-        }
-    }
+    @State private var progress: CGFloat = 0.2
     
     var body: some View {
         VStack {
-            ProgressView(value: progress, total: 1.0)
-                .progressViewStyle(.linear)
-                .padding()
-                
-            HStack {
-                MathButton(operation: .plus, valueOperation: 0.1, competion: mathOperation)
-                
-                Spacer()
-                
-                MathButton(operation: .minus, valueOperation: 0.1, competion: mathOperation)
-                
-            }
+            CircularProgress(progress: progress)
+                .frame(width: 200, height: 200)
             
-            Text("The progress now is: \(String(format: "%.2f", progress))")
+            Slider(value: $progress, in: 0...1)
+                .padding()
         }
     }
 }
