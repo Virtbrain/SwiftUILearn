@@ -7,30 +7,23 @@
 
 import SwiftUI
 
-struct MoonPhaseView: View {
-    var phase: String
-    var image: Image
-    
-    var body: some View {
-        ViewThatFits {
-            HStack {
-                image
-                    .resizable()
-                    .scaledToFit()
-                Text(phase)
-            }
-            image
-                .resizable()
-                .scaledToFit()
-        }
-        .padding()
-    }
-}
-
 struct ContentView: View {
     var body: some View {
-        MoonPhaseView(phase: "Waxing Crescent", image: Image(systemName: "moonphase.waxing.crescent"))
-            .frame(maxWidth: 200)
+        let columns = [
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible())
+        ]
+        
+        LazyVGrid(columns: columns, spacing: 20) {
+            ForEach(0..<10) { index in
+                Text("Item \(index)")
+                    .padding()
+                    .background(Color.blue)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+        }
     }
 }
 
