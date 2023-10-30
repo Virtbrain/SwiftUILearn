@@ -7,19 +7,30 @@
 
 import SwiftUI
 
+struct MoonPhaseView: View {
+    var phase: String
+    var image: Image
+    
+    var body: some View {
+        ViewThatFits {
+            HStack {
+                image
+                    .resizable()
+                    .scaledToFit()
+                Text(phase)
+            }
+            image
+                .resizable()
+                .scaledToFit()
+        }
+        .padding()
+    }
+}
+
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
-            VStack {
-                Text("ProgressView in the NavigationStrack!")
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    ProgressView()
-                        .tint(Color.green)
-                }
-            }
-        }
+        MoonPhaseView(phase: "Waxing Crescent", image: Image(systemName: "moonphase.waxing.crescent"))
+            .frame(maxWidth: 200)
     }
 }
 
